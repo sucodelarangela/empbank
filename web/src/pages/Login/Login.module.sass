@@ -1,0 +1,50 @@
+@use '../../styles/variables'
+@use '../../styles/mixins'
+
+.container
+  min-height: 100vh
+  min-height: 100dvh
+  display: grid
+  gap: 1.5rem
+  grid-template-columns: 1fr 390px
+  padding: 1.5rem
+
+.banner
+  background: url('../../assets/cover.png') no-repeat left
+  background-size: cover
+  border-radius: 1.375rem
+
+.form
+  font-family: variables.$open-sans
+  font-size: 1.25rem
+  line-height: 155%
+  margin-top: 1.5rem
+  & img
+    display: block
+    margin: auto
+  & legend
+    font-weight: 700
+    font-size: 2rem
+    line-height: 135%
+    margin: 2.125rem 0 1.25rem
+  & label
+    display: block
+    font-weight: 600
+    &:nth-of-type(2)
+      margin-top: 12px
+  & input
+    border: 1px solid variables.$gray-4
+    border-radius: 0.5rem
+    padding: 0.875rem 1.25rem
+    width: 100%
+    &::placeholder
+      color: variables.$gray-5
+      font-size: 20px
+      font-family: variables.$open-sans
+  & button[type=submit]
+    margin: 1.75rem 0
+    @include mixins.button (variables.$blue, 1.25rem, uppercase, 1rem 2rem, 1rem)
+  & .redirect
+    display: block
+    text-align: center
+    @include mixins.button (variables.$black, 1.25rem, uppercase, 1rem 2rem, 1rem)
