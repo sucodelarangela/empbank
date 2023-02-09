@@ -26,25 +26,17 @@
     font-weight: 700
     font-size: 2rem
     line-height: 135%
-    margin: 2.125rem 0 1.25rem
+    margin-top: 2.125rem
   & label
-    display: block
+    font-size: 1.25rem
+    font-family: variables.$open-sans
     font-weight: 600
-    &:nth-of-type(2)
-      margin-top: 12px
-  & input
-    border: 1px solid variables.$gray-4
-    border-radius: 0.5rem
-    padding: 0.875rem 1.25rem
-    width: 100%
-    &::placeholder
-      color: variables.$gray-5
-      font-size: 20px
-      font-family: variables.$open-sans
+    margin-top: 12px
+  & input::placeholder
+    font-size: 1.25rem
+    font-family: variables.$open-sans
   & button[type=submit]
     margin: 1.75rem 0
-    @include mixins.button (variables.$blue, 1.25rem, uppercase, 1rem 2rem, 1rem)
-  & .redirect
-    display: block
-    text-align: center
-    @include mixins.button (variables.$black, 1.25rem, uppercase, 1rem 2rem, 1rem)
+    background: variables.$blue
+  & a
+    color: variables.$gray-6

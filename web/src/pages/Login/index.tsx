@@ -1,4 +1,5 @@
 import { useLocation, Link } from 'react-router-dom';
+import { TextInput, PasswordInput, Button } from '@mantine/core';
 
 import styles from './Login.module.sass';
 import logo from '../../assets/logo.png';
@@ -13,32 +14,15 @@ export const Login = () => {
         <img src={logo} alt="Bem vindo a Empbank" />
         <legend>Faça seu {pathname === '/login' ? 'login' : 'cadastro'}</legend>
         {pathname === '/register' && (
-          <>
-            <label htmlFor="fullname">Nome completo</label>
-            <input
-              type="text"
-              id="fullname"
-              placeholder='Insira seu nome completo'
-            />
-          </>
+          <TextInput label='Nome completo' placeholder='Insira seu nome completo' radius="md" size="lg" />
         )}
-        <label htmlFor="email">Email</label>
-        <input
-          type="text"
-          id="email"
-          placeholder='Insira seu email'
-        />
-        <label htmlFor="password">Senha</label>
-        <input
-          type="password"
-          id="password"
-          placeholder='Insira sua senha'
-        />
-        <button type="submit">Fazer {pathname === '/login' ? 'login' : 'cadastro'}</button>
+        <TextInput label='Email' placeholder="Insira seu email" radius="md" size="lg" />
+        <PasswordInput placeholder="Insira sua senha" label="Senha" radius="md" size="lg" />
+        <Button type="submit" radius="lg" size="xl" fullWidth uppercase>Fazer {pathname === '/login' ? 'login' : 'cadastro'}</Button>
         {pathname === '/login' ? (
-          <Link to='/register' className={styles.redirect}>Criar conta</Link>
+          <Link to='/register'><Button color='dark' radius="lg" size="xl" fullWidth uppercase>Criar conta</Button></Link>
         ) : (
-          <Link to='/login' className={styles.redirect}>Já tenho cadastro</Link>
+          <Link to='/login'><Button color='dark' radius="lg" size="xl" fullWidth uppercase>Já tenho cadastro</Button></Link>
         )}
       </form>
     </section>
