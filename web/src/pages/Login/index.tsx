@@ -18,7 +18,7 @@ export const Login = () => {
         )}
         <TextInput label='Email' placeholder="Insira seu email" radius="md" size="lg" />
         <PasswordInput placeholder="Insira sua senha" label="Senha" radius="md" size="lg" />
-        <Button type="submit" radius="lg" size="xl" fullWidth uppercase>Fazer {pathname === '/login' ? 'login' : 'cadastro'}</Button>
+        <Link to='/'><Button type="submit" radius="lg" size="xl" fullWidth uppercase>Fazer {pathname === '/login' ? 'login' : 'cadastro'}</Button></Link>
         {pathname === '/login' ? (
           <Link to='/register'><Button color='dark' radius="lg" size="xl" fullWidth uppercase>Criar conta</Button></Link>
         ) : (
