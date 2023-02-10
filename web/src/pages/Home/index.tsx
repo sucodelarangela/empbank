@@ -1,6 +1,6 @@
 import styles from './Home.module.sass';
 import logo from '../../assets/logo.png';
-import { Button, Group, Pagination, Paper, SimpleGrid, Text, TextInput } from '@mantine/core';
+import { Button, Group, Pagination, Paper, SimpleGrid, Stack, Text, TextInput } from '@mantine/core';
 import { FiSearch } from 'react-icons/fi';
 import { BsArrowUpCircle, BsArrowDownCircle, BsCurrencyDollar } from 'react-icons/bs';
 import { FaCircle } from 'react-icons/fa';
@@ -51,47 +51,47 @@ export const Home = () => {
       </form>
 
       {/* TABELA */}
-      <div className={styles.table}>
-        <div className={styles.transaction}>
+      <Stack justify="flex-start" className={styles.table}>
+        <Group position='center' className={styles.transaction}>
           <Text><FaCircle size={18} color='#F75A68' />Título da Saída</Text>
           <Text color='red'>- R$ 1.000,00</Text>
           <Text>Categoria da Saída</Text>
           <Text>01/01/2023</Text>
-        </div>
-        <div className={styles.transaction}>
+        </Group>
+        <Group position='center' className={styles.transaction}>
           <Text><FaCircle size={18} color='#00B37E' />Título da Entrada</Text>
-          <Text color='red'>R$ 1.000,00</Text>
+          <Text color='green'>R$ 1.000,00</Text>
           <Text>Categoria da Entrada</Text>
           <Text>01/01/2023</Text>
-        </div>
-        <div className={styles.transaction}>
+        </Group>
+        <Group position='center' className={styles.transaction}>
           <Text><FaCircle size={18} color='#F75A68' />Título da Saída</Text>
           <Text color='red'>- R$ 1.000,00</Text>
           <Text>Categoria da Saída</Text>
           <Text>01/01/2023</Text>
-        </div>
-        <div className={styles.transaction}>
+        </Group>
+        <Group position='center' className={styles.transaction}>
           <Text><FaCircle size={18} color='#00B37E' />Título da Entrada</Text>
-          <Text color='red'>R$ 1.000,00</Text>
+          <Text color='green'>R$ 1.000,00</Text>
           <Text>Categoria da Entrada</Text>
           <Text>01/01/2023</Text>
-        </div>
-        <div className={styles.transaction}>
+        </Group>
+        <Group position='center' className={styles.transaction}>
           <Text><FaCircle size={18} color='#F75A68' />Título da Saída</Text>
           <Text color='red'>- R$ 1.000,00</Text>
           <Text>Categoria da Saída</Text>
           <Text>01/01/2023</Text>
-        </div>
-        <div className={styles.transaction}>
+        </Group>
+        <Group position='center' className={styles.transaction}>
           <Text><FaCircle size={18} color='#00B37E' />Título da Entrada</Text>
-          <Text color='red'>R$ 1.000,00</Text>
+          <Text color='green'>R$ 1.000,00</Text>
           <Text>Categoria da Entrada</Text>
           <Text>01/01/2023</Text>
-        </div>
-      </div>
+        </Group>
+      </Stack>
 
       {/* PAGINAÇÃO */}
       <Pagination total={10} color="dark" withControls={false}></Pagination>
-    </section>
+    </section >
   );
 };
