@@ -1,16 +1,18 @@
 import styles from './Home.module.sass';
 import logo from '../../assets/logo.png';
 import { Button, Group, Pagination, Paper, SimpleGrid, Stack, Text, TextInput } from '@mantine/core';
-import { FiSearch } from 'react-icons/fi';
 import { BsArrowUpCircle, BsArrowDownCircle, BsCurrencyDollar } from 'react-icons/bs';
+import { FiSearch } from 'react-icons/fi';
 import { FaCircle } from 'react-icons/fa';
+import { Modal } from './Modal';
 
 export const Home = () => {
   return (
     <section className={styles.container}>
       <header>
         <img src={logo} alt='Sua carteira' />
-        <Button radius='md' size='lg'>Nova transação</Button>
+        <Modal />
+        {/* <Button radius='md' size='lg'>Nova transação</Button> */}
       </header>
 
       {/* DASHBOARD */}
