@@ -45,7 +45,7 @@ export const Table = () => {
               {transaction.title}
             </Text>
             <Text color={transaction.type === 'income' ? '#00B37E' : '#F75A68'}>
-              {transaction.type === 'income' ? `R$ ${transaction.value}` : `- R$ ${transaction.value}`}
+              {transaction.type === 'income' ? `R$ ${transaction.value}` : `- R$ ${transaction.value * - 1}`}
             </Text>
             <Text>
               {transaction.category}

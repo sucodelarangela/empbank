@@ -17,7 +17,11 @@ const port = process.env.PORT || 8000;
 const prisma = new PrismaClient();
 
 app.get('/transactions', async (req: Request, res: Response) => {
-  const transactions = await prisma.transactions.findMany();
+  const transactions = await prisma.transactions.findMany({
+    orderBy: {
+      createdAt: 'desc'
+    }
+  });
   return res.status(200).json(transactions);
 });
 
