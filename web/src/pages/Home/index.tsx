@@ -5,8 +5,11 @@ import { BsArrowUpCircle, BsArrowDownCircle, BsCurrencyDollar } from 'react-icon
 import { FiSearch } from 'react-icons/fi';
 import { Modal } from './Modal';
 import { Table } from './Table';
+import { calcValues } from '../../utils/calcValues';
 
 export const Home = () => {
+  const { income, outcome, total } = calcValues();
+
   return (
     <section className={styles.container}>
       <header>
@@ -22,7 +25,7 @@ export const Home = () => {
             <BsArrowUpCircle color="#00B37E" size={32} />
           </Group>
           <Group>
-            <Text className={styles.value}>R$ 10.000,00</Text>
+            <Text className={styles.value}>R$ {income.toLocaleString(undefined, { minimumFractionDigits: 2 })}</Text>
           </Group>
         </Paper>
         <Paper withBorder p='md' radius='md'>
@@ -31,7 +34,7 @@ export const Home = () => {
             <BsArrowDownCircle color="#F75A68" size={32} />
           </Group>
           <Group>
-            <Text className={styles.value}>R$ 4.000,00</Text>
+            <Text className={styles.value}>R$ {outcome.toLocaleString(undefined, { minimumFractionDigits: 2 })}</Text>
           </Group>
         </Paper>
         <Paper withBorder p='md' radius='md'>
@@ -40,7 +43,7 @@ export const Home = () => {
             <BsCurrencyDollar color="#00B37E" size={32} />
           </Group>
           <Group>
-            <Text className={styles.value}>R$ 6.000,00</Text>
+            <Text className={styles.value}>R$ {total.toLocaleString(undefined, { minimumFractionDigits: 2 })}</Text>
           </Group>
         </Paper>
       </SimpleGrid>
