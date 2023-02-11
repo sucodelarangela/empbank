@@ -5,7 +5,7 @@ import { FaCircle } from 'react-icons/fa';
 import { useFetch } from '../../../hooks/useFetch';
 import { api } from '../../../api/api';
 
-
+// tipagem do data retornado do fetch
 interface ITransaction {
   id: string;
   title: string;
@@ -20,14 +20,9 @@ export const Table = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [firstIndex, setFirstIndex] = useState<number>(0);
   const [lastIndex, setLastIndex] = useState<number>(10);
-  const { data, loading, error } = useFetch(`${api}/transactions`);
-  const [transactions, setTransactions] = useState([]);
-  console.log(firstIndex, lastIndex);
+  const { data: transactions, loading, error } = useFetch(`${api}/transactions`);
 
-  useEffect(() => {
-    setTransactions(data);
-  }, [data]);
-
+  // lidando com índices para listagem de paginação
   useEffect(() => {
     if (currentPage > 1) {
       setFirstIndex(currentPage * 10 - 10);
@@ -62,7 +57,13 @@ export const Table = () => {
         ))}
       </Stack>
 
-      <Pagination page={currentPage} onChange={setCurrentPage} total={Math.ceil(transactions.length / 10)} color="dark" withControls={false}></Pagination>
+      <Pagination
+        page={currentPage}
+        onChange={setCurrentPage}
+        total={Math.ceil(transactions ? transactions.length / 10 : 1)}
+        color="dark"
+        withControls={false}
+      />
     </>
   );
 };
