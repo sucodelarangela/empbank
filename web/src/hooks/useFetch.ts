@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 export const useFetch = (url: string) => {
   // info recebida da api, inicialmente definida como null
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<any | null>(null);
   // estados para setar a config dos verbos http
   const [config, setConfig] = useState<object | null>(null); // para os headers
   const [method, setMethod] = useState<string | null>(null); //GET ou POST ou DELETE
