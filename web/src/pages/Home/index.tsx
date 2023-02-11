@@ -1,6 +1,6 @@
 import styles from './Home.module.sass';
 import logo from '../../assets/logo.png';
-import { Button, Group, Pagination, Paper, SimpleGrid, Text, TextInput } from '@mantine/core';
+import { Button, Group, Paper, SimpleGrid, Text, TextInput } from '@mantine/core';
 import { BsArrowUpCircle, BsArrowDownCircle, BsCurrencyDollar } from 'react-icons/bs';
 import { FiSearch } from 'react-icons/fi';
 import { Modal } from './Modal';
@@ -51,11 +51,8 @@ export const Home = () => {
         <Button leftIcon={<FiSearch />} variant='outline' radius='md' size='lg'>Buscar</Button>
       </form>
 
-      {/* TABELA DE TRANSAÇÕES */}
+      {/* TABELA DE TRANSAÇÕES E PAGINAÇÃO */}
       <Table />
-
-      {/* PAGINAÇÃO */}
-      <Pagination total={10} color="dark" withControls={false}></Pagination>
     </section >
   );
 };

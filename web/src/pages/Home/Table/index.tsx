@@ -1,5 +1,6 @@
 import styles from './Table.module.sass';
-import { Group, Loader, Stack, Text } from "@mantine/core";
+import { useEffect, useState } from 'react';
+import { Group, Loader, Pagination, Stack, Text } from "@mantine/core";
 import { FaCircle } from 'react-icons/fa';
 import { useFetch } from '../../../hooks/useFetch';
 import { api } from '../../../api/api';
@@ -16,29 +17,52 @@ interface ITransaction {
 }
 
 export const Table = () => {
-  const { data: transactions, loading, error } = useFetch(`${api}/transactions`);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [firstIndex, setFirstIndex] = useState<number>(0);
+  const [lastIndex, setLastIndex] = useState<number>(10);
+  const { data, loading, error } = useFetch(`${api}/transactions`);
+  const [transactions, setTransactions] = useState([]);
+  console.log(firstIndex, lastIndex);
+
+  useEffect(() => {
+    setTransactions(data);
+  }, [data]);
+
+  useEffect(() => {
+    if (currentPage > 1) {
+      setFirstIndex(currentPage * 10 - 10);
+      setLastIndex(currentPage * 10);
+    } else {
+      setFirstIndex(0);
+      setLastIndex(10);
+    }
+  }, [currentPage]);
 
   return (
-    <Stack justify="flex-start" className={styles.table}>
-      {loading && <Loader style={{ margin: '0 auto' }} />}
-      {error && <p>{error}</p>}
-      {transactions && transactions.map((transaction: ITransaction) => (
-        <Group key={transaction.id} position='center' className={styles.transaction}>
-          <Text>
-            <FaCircle size={18} color={transaction.type === 'income' ? '#00B37E' : '#F75A68'} />
-            {transaction.title}
-          </Text>
-          <Text color={transaction.type === 'income' ? '#00B37E' : '#F75A68'}>
-            {transaction.type === 'income' ? `R$ ${transaction.value}` : `- R$ ${transaction.value}`}
-          </Text>
-          <Text>
-            {transaction.category}
-          </Text>
-          <Text>
-            {new Date(transaction.createdAt).toLocaleString().split(' ')[0]}
-          </Text>
-        </Group>
-      ))}
-    </Stack>
+    <>
+      <Stack justify="flex-start" className={styles.table}>
+        {loading && <Loader style={{ margin: '0 auto' }} />}
+        {error && <p>{error}</p>}
+        {transactions && transactions.slice(firstIndex, lastIndex).map((transaction: ITransaction) => (
+          <Group key={transaction.id} position='center' className={styles.transaction}>
+            <Text>
+              <FaCircle size={18} color={transaction.type === 'income' ? '#00B37E' : '#F75A68'} />
+              {transaction.title}
+            </Text>
+            <Text color={transaction.type === 'income' ? '#00B37E' : '#F75A68'}>
+              {transaction.type === 'income' ? `R$ ${transaction.value}` : `- R$ ${transaction.value}`}
+            </Text>
+            <Text>
+              {transaction.category}
+            </Text>
+            <Text>
+              {new Date(transaction.createdAt).toLocaleString().split(' ')[0]}
+            </Text>
+          </Group>
+        ))}
+      </Stack>
+
+      <Pagination page={currentPage} onChange={setCurrentPage} total={Math.ceil(transactions.length / 10)} color="dark" withControls={false}></Pagination>
+    </>
   );
 };
