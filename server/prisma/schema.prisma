@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // url de conexão do Railway
+}
+
+// schemas das tabelas do postgres no Railway
+// são migrados e sincronizados com `npx prisma migrate dev`
+model Transactions {
+  id        String   @id @default(uuid())
+  title     String
+  value     Float
+  category  String
+  type      String
+  createdAt DateTime @default(now())
+  userId    String
+  User      User     @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id           String         @id @default(uuid())
+  uuid         String         @unique
+  email        String         @unique
+  name         String?
+  Transactions Transactions[]
+}
