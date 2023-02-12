@@ -3,18 +3,39 @@ import { useState } from 'react';
 import { BsArrowUpCircle, BsArrowDownCircle } from 'react-icons/bs';
 import { Button, Group, Modal as Dialog, NumberInput, Select, Stack, TextInput } from '@mantine/core';
 
-interface ITransactions {
+interface ITypes {
   income: boolean;
   outcome: boolean;
 }
 
+interface ITransaction {
+  title: string;
+  value: number;
+  category: string;
+  type: string;
+  userId: string;
+}
+
 export const Modal = () => {
   const [opened, setOpened] = useState<boolean>(false);
-  const [value, setValue] = useState<number>();
-  const [checked, setChecked] = useState<ITransactions>({
+  const [checked, setChecked] = useState<ITypes>({
     income: false,
     outcome: false
   });
+  const [newTransaction, setNewTransaction] = useState<ITransaction>({
+    title: '',
+    value: 0,
+    category: '',
+    type: '',
+    userId: '1'
+  });
+
+  function handleCheck(type: string): void {
+    type === 'income' ? setChecked({ income: true, outcome: false }) : setChecked({ income: false, outcome: true });
+    setNewTransaction({ ...newTransaction, type });
+  }
+
+  console.log(newTransaction);
 
   return (
     <>
@@ -33,13 +54,15 @@ export const Modal = () => {
               placeholder='Insira o título da transação'
               label='Título'
               radius='md'
+              value={newTransaction.title}
+              onChange={(e) => setNewTransaction({ ...newTransaction, title: e.target.value })}
             />
             <NumberInput
               label='Valor'
               placeholder='Insira o valor da transação'
               decimalSeparator=','
-              value={value}
-              onChange={(val: number) => setValue(val)}
+              value={newTransaction.value}
+              onChange={(val: number) => setNewTransaction({ ...newTransaction, value: val })}
               radius='md'
               hideControls
             />
@@ -50,11 +73,15 @@ export const Modal = () => {
               radius='md'
               style={{ marginBottom: '0.5rem' }}
               data={[
-                { value: 'food', label: 'Alimentação' },
-                { value: 'salary', label: 'Salário' },
-                { value: 'transport', label: 'Transporte' },
-                { value: 'rent', label: 'Aluguel' },
+                { value: 'Alimentação', label: 'Alimentação' },
+                { value: 'Salário', label: 'Salário' },
+                { value: 'Transporte', label: 'Transporte' },
+                { value: 'Aluguel', label: 'Aluguel' },
+                { value: 'Lazer', label: 'Lazer' },
+                { value: 'Compras', label: 'Compras' },
               ]}
+              value={newTransaction.category}
+              onChange={(value: string) => setNewTransaction({ ...newTransaction, category: value })}
             />
             <Group position='center' noWrap>
               <Button
@@ -64,7 +91,7 @@ export const Modal = () => {
                 radius='md'
                 size='lg'
                 leftIcon={<BsArrowUpCircle color='#00B37E' />}
-                onClick={() => setChecked({ income: true, outcome: false })}
+                onClick={() => handleCheck('income')}
               >
                 Entrada
               </Button>
@@ -75,7 +102,7 @@ export const Modal = () => {
                 radius='md'
                 size='lg'
                 leftIcon={<BsArrowDownCircle color='#F75A68' />}
-                onClick={() => setChecked({ income: false, outcome: true })}
+                onClick={() => handleCheck('outcome')}
               >
                 Saída
               </Button>
