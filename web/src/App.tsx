@@ -1,18 +1,33 @@
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useAuth } from './hooks/useAuth';
+import { onAuthStateChanged } from 'firebase/auth';
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
+  const { auth } = useAuth();
+  const [user, setUser] = useState(undefined);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+  }, [auth]);
+
   return (
-    <main className="App">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Login />} />
-        </Routes>
-      </Router>
-    </main>
+    <AuthProvider value={user}>
+      <main className="App">
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Login />} />
+          </Routes>
+        </Router>
+      </main>
+    </AuthProvider>
   );
 }
 
