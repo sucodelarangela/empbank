@@ -25,6 +25,20 @@ app.get('/transactions', async (req: Request, res: Response) => {
   return res.status(200).json(transactions);
 });
 
+app.post('/transactions', async (req: Request, res: Response) => {
+  const body = req.body;
+  const transactions = await prisma.transactions.create({
+    data: {
+      title: body.title,
+      value: body.value,
+      category: body.category,
+      type: body.type,
+      userId: body.userId
+    }
+  });
+  return res.status(201).json(transactions);
+});
+
 app.listen(port, () => {
   console.log('Database connected');
 });
