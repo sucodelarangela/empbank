@@ -20,7 +20,7 @@ interface IUser {
 
 export const Home = () => {
   const { refresh } = useRefreshValue(); // estado para controle de re-renderização
-  const { user } = useAuthValue();
+  const { user }: any = useAuthValue(); // dados do usuário logado no Firebase
   const { logout } = useAuth();
   const [name, setName] = useState<string>('');
 
@@ -41,11 +41,11 @@ export const Home = () => {
       <header>
         <img src={logo} alt='Sua carteira' />
         <Button onClick={logout}>Bem vindo(a), {name}</Button>
-        <Modal />
+        <Modal userId={user.uid} />
       </header>
 
       {/* DASHBOARD */}
-      {refresh ? <Loader /> : <Dashboard />}
+      {refresh ? <Loader /> : <Dashboard userId={user.uid} />}
 
       {/* BUSCA */}
       <form className={styles.search}>
@@ -54,7 +54,7 @@ export const Home = () => {
       </form>
 
       {/* TABELA DE TRANSAÇÕES E PAGINAÇÃO */}
-      {refresh ? <Loader /> : <Table />}
+      {refresh ? <Loader /> : <Table userId={user.uid} />}
     </section >
   );
 };

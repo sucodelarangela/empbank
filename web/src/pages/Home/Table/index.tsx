@@ -16,7 +16,11 @@ interface ITransaction {
   userId: string;
 }
 
-export const Table = () => {
+interface Props {
+  userId: string;
+}
+
+export const Table = ({ userId }: Props) => {
   const { refresh } = useRefreshValue(); // estado para controle de re-renderização
   // estados para controle de paginação:
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -25,9 +29,11 @@ export const Table = () => {
   // estado para renderização da tabela
   const [transactions, setTransactions] = useState([]);
 
+  console.log(userId);
+
   // faz o GET do banco de dados e alimenta o estado acima
   async function fetchData() {
-    await fetch(`${api}/transactions`)
+    await fetch(`${api}/transactions/${userId}`)
       .then(res => res.json())
       .then(data => {
         setTransactions(data);

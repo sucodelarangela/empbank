@@ -16,8 +16,12 @@ const port = process.env.PORT || 8000;
 // conectando ao banco de dados com uma instância do Prisma Client
 const prisma = new PrismaClient();
 
-app.get('/transactions', async (req: Request, res: Response) => {
+app.get('/transactions/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
   const transactions = await prisma.transactions.findMany({
+    where: {
+      userId: id
+    },
     orderBy: {
       createdAt: 'desc'
     }

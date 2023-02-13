@@ -15,7 +15,11 @@ interface ITransaction {
   userId: string;
 }
 
-export const Dashboard = () => {
+interface Props {
+  userId: string;
+}
+
+export const Dashboard = ({ userId }: Props) => {
   const { refresh } = useRefreshValue(); // estado para controle de re-renderização
   // estado para o gerenciamento da dashboard
   const [values, setValues] = useState({
@@ -28,7 +32,7 @@ export const Dashboard = () => {
   async function calcValues() {
     let income = 0;
     let outcome = 0;
-    await fetch(`${api}/transactions`)
+    await fetch(`${api}/transactions/${userId}`)
       .then(res => res.json())
       .then(data => {
         data.forEach((transaction: ITransaction) => {

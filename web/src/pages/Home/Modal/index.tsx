@@ -21,7 +21,11 @@ interface ITransaction {
   userId: string;
 }
 
-export const Modal = () => {
+interface Props {
+  userId: string;
+}
+
+export const Modal = ({ userId }: Props) => {
   const { setRefresh } = useRefreshValue(); // estado para controle de re-renderização
   const { httpConfig } = useFetch(`${api}/transactions`);
   const [opened, setOpened] = useState<boolean>(false);
@@ -34,7 +38,7 @@ export const Modal = () => {
     value: 0,
     category: '',
     type: '',
-    userId: '1'
+    userId: userId
   });
 
   // lida com a seleção do tipo de transação na modal
