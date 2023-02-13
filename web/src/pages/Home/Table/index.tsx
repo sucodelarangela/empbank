@@ -17,14 +17,15 @@ interface ITransaction {
 }
 
 export const Table = () => {
-  const { refresh } = useRefreshValue();
+  const { refresh } = useRefreshValue(); // estado para controle de re-renderização
+  // estados para controle de paginação:
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [firstIndex, setFirstIndex] = useState<number>(0);
   const [lastIndex, setLastIndex] = useState<number>(10);
+  // estado para renderização da tabela
   const [transactions, setTransactions] = useState([]);
 
-  console.log('table: ', refresh);
-
+  // faz o GET do banco de dados e alimenta o estado acima
   async function fetchData() {
     await fetch(`${api}/transactions`)
       .then(res => res.json())
@@ -33,7 +34,7 @@ export const Table = () => {
       });
   }
 
-  // carrega os dados pela primeira vez
+  // carrega os dados pela primeira vez na tela
   useEffect(() => {
     fetchData();
   }, []);

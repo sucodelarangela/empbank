@@ -1,16 +1,14 @@
 import styles from './Home.module.sass';
 import logo from '../../assets/logo.png';
-import { Button, Group, Paper, SimpleGrid, Text, TextInput } from '@mantine/core';
-import { BsArrowUpCircle, BsArrowDownCircle, BsCurrencyDollar } from 'react-icons/bs';
+import { Button, Loader, TextInput } from '@mantine/core';
 import { FiSearch } from 'react-icons/fi';
 import { Modal } from './Modal';
 import { Table } from './Table';
-import { calcValues } from '../../utils/calcValues';
 import { useRefreshValue } from '../../context/RefreshContext';
+import { Dashboard } from './Dashboard';
 
 export const Home = () => {
-  // const { refresh } = useRefreshValue();
-  const { income, outcome, total } = calcValues();
+  const { refresh } = useRefreshValue(); // estado para controle de re-renderização
 
   return (
     <section className={styles.container}>
@@ -20,35 +18,7 @@ export const Home = () => {
       </header>
 
       {/* DASHBOARD */}
-      <SimpleGrid cols={3} spacing='xl' className={styles.dashboard}>
-        <Paper withBorder p='md' radius='md'>
-          <Group position='apart'>
-            <Text>Entradas</Text>
-            <BsArrowUpCircle color="#00B37E" size={32} />
-          </Group>
-          <Group>
-            <Text className={styles.value}>R$ {income.toLocaleString(undefined, { minimumFractionDigits: 2 })}</Text>
-          </Group>
-        </Paper>
-        <Paper withBorder p='md' radius='md'>
-          <Group position='apart'>
-            <Text>Saídas</Text>
-            <BsArrowDownCircle color="#F75A68" size={32} />
-          </Group>
-          <Group>
-            <Text className={styles.value}>R$ {outcome.toLocaleString(undefined, { minimumFractionDigits: 2 })}</Text>
-          </Group>
-        </Paper>
-        <Paper withBorder p='md' radius='md'>
-          <Group position='apart'>
-            <Text>Total</Text>
-            <BsCurrencyDollar color="#00B37E" size={32} />
-          </Group>
-          <Group>
-            <Text className={styles.value}>R$ {total.toLocaleString(undefined, { minimumFractionDigits: 2 })}</Text>
-          </Group>
-        </Paper>
-      </SimpleGrid>
+      {refresh ? <Loader /> : <Dashboard />}
 
       {/* BUSCA */}
       <form className={styles.search}>
@@ -57,7 +27,7 @@ export const Home = () => {
       </form>
 
       {/* TABELA DE TRANSAÇÕES E PAGINAÇÃO */}
-      <Table />
+      {refresh ? <Loader /> : <Table />}
     </section >
   );
 };

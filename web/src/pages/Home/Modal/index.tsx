@@ -6,11 +6,13 @@ import { useFetch } from '../../../hooks/useFetch';
 import { api } from '../../../api/api';
 import { useRefreshValue } from '../../../context/RefreshContext';
 
+// tipagem do tipo de transação (Entrada ou Saida)
 interface ITypes {
   income: boolean;
   outcome: boolean;
 }
 
+// tipagem da transação em si
 interface ITransaction {
   title: string;
   value: number;
@@ -20,7 +22,7 @@ interface ITransaction {
 }
 
 export const Modal = () => {
-  const { refresh, setRefresh } = useRefreshValue();
+  const { setRefresh } = useRefreshValue(); // estado para controle de re-renderização
   const { httpConfig } = useFetch(`${api}/transactions`);
   const [opened, setOpened] = useState<boolean>(false);
   const [checked, setChecked] = useState<ITypes>({
@@ -35,27 +37,32 @@ export const Modal = () => {
     userId: '1'
   });
 
-  console.log('modal: ', refresh);
-
+  // lida com a seleção do tipo de transação na modal
   function handleCheck(type: string): void {
     type === 'income' ? setChecked({ income: true, outcome: false }) : setChecked({ income: false, outcome: true });
     setNewTransaction({ ...newTransaction, type });
   }
 
+  // abre a modal e mostra o Loader nos componentes
   function handleClick() {
     setOpened(true);
     setRefresh(true);
   }
 
+  // fecha a modal e retira o Loader
   function handleClose() {
     setOpened(false);
     setRefresh(false);
   }
 
   async function saveTransaction(e: FormEvent) {
+    // previne o comportamento padrão do form
     e.preventDefault();
+    // aguarda o POST da transação no banco de dados
     await httpConfig(newTransaction, 'POST');
+    // fecha a modal
     setOpened(false);
+    // aguarda 1s para fazer um novo fetch do banco de dados e atualizar a tabela e a dashboard
     setTimeout(() => {
       setRefresh(false);
     }, 1000);
