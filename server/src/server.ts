@@ -25,6 +25,16 @@ app.get('/transactions', async (req: Request, res: Response) => {
   return res.status(200).json(transactions);
 });
 
+app.get('/user/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const user = await prisma.user.findUniqueOrThrow({
+    where: {
+      uuid: id
+    }
+  });
+  return res.json({ user });
+});
+
 app.post('/transactions', async (req: Request, res: Response) => {
   const body = req.body;
   const transactions = await prisma.transactions.create({

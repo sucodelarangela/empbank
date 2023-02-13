@@ -66,10 +66,10 @@ export const useAuth = () => {
   };
 
   // LOG OUT
-  // const logout = () => {
-  //   checkIfIsCancelled();
-  //   signOut(auth);
-  // };
+  const logout = () => {
+    checkIfIsCancelled();
+    signOut(auth);
+  };
 
   // LOG IN
   const login = async (data) => {
@@ -138,7 +138,7 @@ export const useAuth = () => {
     createUser,
     error,
     loading,
-    // logout,
+    logout,
     login,
     // deleteAccount
   };
