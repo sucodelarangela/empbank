@@ -1,7 +1,9 @@
 import styles from './Modal.module.sass';
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 import { BsArrowUpCircle, BsArrowDownCircle } from 'react-icons/bs';
 import { Button, Group, Modal as Dialog, NumberInput, Select, Stack, TextInput } from '@mantine/core';
+import { useFetch } from '../../../hooks/useFetch';
+import { api } from '../../../api/api';
 
 interface ITypes {
   income: boolean;
@@ -17,6 +19,7 @@ interface ITransaction {
 }
 
 export const Modal = () => {
+  const { httpConfig } = useFetch(`${api}/transactions`);
   const [opened, setOpened] = useState<boolean>(false);
   const [checked, setChecked] = useState<ITypes>({
     income: false,
@@ -35,7 +38,11 @@ export const Modal = () => {
     setNewTransaction({ ...newTransaction, type });
   }
 
-  console.log(newTransaction);
+  async function saveTransaction(e: FormEvent) {
+    e.preventDefault();
+    await httpConfig(newTransaction, 'POST');
+    setOpened(false);
+  }
 
   return (
     <>
@@ -48,7 +55,7 @@ export const Modal = () => {
         shadow='0px 4px 32px rgba(0, 0, 0, 0.8)'
         centered
       >
-        <form>
+        <form onSubmit={saveTransaction}>
           <Stack>
             <TextInput
               placeholder='Insira o título da transação'
@@ -64,6 +71,7 @@ export const Modal = () => {
               value={newTransaction.value}
               onChange={(val: number) => setNewTransaction({ ...newTransaction, value: val })}
               radius='md'
+              precision={2}
               hideControls
             />
             <Select
@@ -111,6 +119,7 @@ export const Modal = () => {
               classNames={{ root: styles.submit }}
               radius='md'
               size='lg'
+              type='submit'
             >Adicionar</Button>
           </Stack>
         </form>
