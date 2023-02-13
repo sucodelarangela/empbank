@@ -4,6 +4,7 @@ import { BsArrowUpCircle, BsArrowDownCircle } from 'react-icons/bs';
 import { Button, Group, Modal as Dialog, NumberInput, Select, Stack, TextInput } from '@mantine/core';
 import { useFetch } from '../../../hooks/useFetch';
 import { api } from '../../../api/api';
+import { useRefreshValue } from '../../../context/RefreshContext';
 
 interface ITypes {
   income: boolean;
@@ -19,6 +20,7 @@ interface ITransaction {
 }
 
 export const Modal = () => {
+  const { refresh, setRefresh } = useRefreshValue();
   const { httpConfig } = useFetch(`${api}/transactions`);
   const [opened, setOpened] = useState<boolean>(false);
   const [checked, setChecked] = useState<ITypes>({
@@ -33,15 +35,30 @@ export const Modal = () => {
     userId: '1'
   });
 
+  console.log('modal: ', refresh);
+
   function handleCheck(type: string): void {
     type === 'income' ? setChecked({ income: true, outcome: false }) : setChecked({ income: false, outcome: true });
     setNewTransaction({ ...newTransaction, type });
+  }
+
+  function handleClick() {
+    setOpened(true);
+    setRefresh(true);
+  }
+
+  function handleClose() {
+    setOpened(false);
+    setRefresh(false);
   }
 
   async function saveTransaction(e: FormEvent) {
     e.preventDefault();
     await httpConfig(newTransaction, 'POST');
     setOpened(false);
+    setTimeout(() => {
+      setRefresh(false);
+    }, 1000);
   }
 
   return (
@@ -49,7 +66,7 @@ export const Modal = () => {
       <Dialog
         classNames={{ header: styles.modal, title: styles.title }}
         opened={opened}
-        onClose={() => setOpened(false)}
+        onClose={handleClose}
         radius='md'
         title='Nova transação'
         shadow='0px 4px 32px rgba(0, 0, 0, 0.8)'
@@ -126,7 +143,7 @@ export const Modal = () => {
       </Dialog>
 
       <Group position='center'>
-        <Button radius='md' size='lg' onClick={() => setOpened(true)}>Nova transação</Button>
+        <Button radius='md' size='lg' onClick={handleClick}>Nova transação</Button>
       </Group>
     </>
   );

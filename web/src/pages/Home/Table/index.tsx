@@ -1,9 +1,9 @@
 import styles from './Table.module.sass';
 import { useEffect, useState } from 'react';
-import { Group, Loader, Pagination, Stack, Text } from "@mantine/core";
+import { Group, Pagination, Stack, Text } from "@mantine/core";
 import { FaCircle } from 'react-icons/fa';
-import { useFetch } from '../../../hooks/useFetch';
 import { api } from '../../../api/api';
+import { useRefreshValue } from '../../../context/RefreshContext';
 
 // tipagem do data retornado do fetch
 interface ITransaction {
@@ -17,10 +17,31 @@ interface ITransaction {
 }
 
 export const Table = () => {
+  const { refresh } = useRefreshValue();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [firstIndex, setFirstIndex] = useState<number>(0);
   const [lastIndex, setLastIndex] = useState<number>(10);
-  const { data: transactions, loading, error } = useFetch(`${api}/transactions`);
+  const [transactions, setTransactions] = useState([]);
+
+  console.log('table: ', refresh);
+
+  async function fetchData() {
+    await fetch(`${api}/transactions`)
+      .then(res => res.json())
+      .then(data => {
+        setTransactions(data);
+      });
+  }
+
+  // carrega os dados pela primeira vez
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // recarrega os dados quando houver atualização
+  useEffect(() => {
+    fetchData();
+  }, [refresh]);
 
   // lidando com índices para listagem de paginação
   useEffect(() => {
@@ -36,9 +57,7 @@ export const Table = () => {
   return (
     <>
       <Stack justify="flex-start" className={styles.table}>
-        {loading && <Loader style={{ margin: '0 auto' }} />}
-        {error && <p>{error}</p>}
-        {transactions && transactions.slice(firstIndex, lastIndex).map((transaction: ITransaction) => (
+        {!refresh && transactions && transactions.slice(firstIndex, lastIndex).map((transaction: ITransaction) => (
           <Group key={transaction.id} position='center' className={styles.transaction}>
             <Text>
               <FaCircle size={18} color={transaction.type === 'income' ? '#00B37E' : '#F75A68'} />

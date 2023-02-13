@@ -6,8 +6,10 @@ import { FiSearch } from 'react-icons/fi';
 import { Modal } from './Modal';
 import { Table } from './Table';
 import { calcValues } from '../../utils/calcValues';
+import { useRefreshValue } from '../../context/RefreshContext';
 
 export const Home = () => {
+  // const { refresh } = useRefreshValue();
   const { income, outcome, total } = calcValues();
 
   return (
