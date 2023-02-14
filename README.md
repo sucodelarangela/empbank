@@ -12,7 +12,7 @@ O projeto deste repositório é uma aplicação de controle financeiro onde o us
 | 🪧 Vitrine. Dev |     |
 | -------------- | --- |
 | ✨ Nome        | **Empbank: controle financeiro** |
-| 🏷️ Tecnologias | React, TypeScript, [Mantine](https://mantine.dev/), PostgreSQL, Prisma, Firebase, Node, Express |
+| 🏷️ Tecnologias | React, TypeScript, [Mantine](https://mantine.dev/), Sass, PostgreSQL, Prisma, Firebase, Node, Express |
 | 🚀 URL         | Em breve |
 | 🎨 Design      | [Figma](https://www.figma.com/file/I5ctuYJN7TMTEQx5oL1wt3/Prova-Empbank) |
 
@@ -22,6 +22,7 @@ O projeto deste repositório é uma aplicação de controle financeiro onde o us
   <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
   <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
   <img src="https://img.shields.io/badge/mantine-1d87d5?style=for-the-badge">
+  <img src="https://img.shields.io/badge/sass-f8f9fa?style=for-the-badge&logo=sass&logoColor=CC6699">
   <img src="https://img.shields.io/badge/firebase-051e34?style=for-the-badge&logo=firebase&logoColor=FFCA28">
   <img src="https://img.shields.io/badge/postgresql-212121?style=for-the-badge&logo=postgresql&logoColor=4169E1"/>
   <img src="https://img.shields.io/badge/prisma-f7fafc?style=for-the-badge&logo=prisma&logoColor=2D3748">
