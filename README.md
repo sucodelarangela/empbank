@@ -16,7 +16,7 @@ O projeto deste repositório é uma aplicação de controle financeiro onde o us
 | 🚀 URL         | Em breve |
 | 🎨 Design      | [Figma](https://www.figma.com/file/I5ctuYJN7TMTEQx5oL1wt3/Prova-Empbank) |
 
-<!-- ![](https://raw.githubusercontent.com/sucodelarangela/codeshare/main/public/og-image.png#vitrinedev) -->
+![](https://raw.githubusercontent.com/sucodelarangela/empbank/main/web/public/og-image.jpg#vitrinedev)
 
 <div>
   <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
