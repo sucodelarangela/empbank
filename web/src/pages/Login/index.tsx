@@ -1,6 +1,6 @@
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useEffect } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import { TextInput, PasswordInput, Button } from '@mantine/core';
+import { TextInput, PasswordInput, Button, Text, LoadingOverlay } from '@mantine/core';
 import { useAuth } from '../../hooks/useAuth';
 import styles from './Login.module.sass';
 import logo from '../../assets/logo.png';
@@ -10,7 +10,7 @@ export const Login = () => {
   const [displayName, setDisplayName] = useState<string>(''); // this is a front end error
   const [email, setEmail] = useState<string>(''); // this is a front end error
   const [password, setPassword] = useState<string>(''); // this is a front end error
-  const { login, createUser } = useAuth();
+  const { login, createUser, error: authError, loading } = useAuth();
   let { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -34,13 +34,19 @@ export const Login = () => {
     navigate('/login');
   };
 
+  // mostra erros de autenticação
+  useEffect(() => {
+    if (authError) setError(authError);
+  }, [authError]);
+
   return (
     <section className={styles.container}>
+      {loading && <LoadingOverlay visible />}
       <div className={styles.banner}></div>
       <form className={styles.form} onSubmit={pathname === '/login' ? handleSubmit : handleRegister}>
         <img src={logo} alt="Bem vindo a Empbank" />
         <legend>Faça seu {pathname === '/login' ? 'login' : 'cadastro'}</legend>
-        {error && <p>{error}</p>}
+        {error && <Text fz='md' fw='bold' color='red' ta='center' className={styles.error}>{error}</Text>}
         {pathname === '/register' && (
           <TextInput
             label='Nome completo'

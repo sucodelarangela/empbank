@@ -1,6 +1,6 @@
 import styles from './Table.module.sass';
 import { useEffect, useState } from 'react';
-import { Group, Pagination, Stack, Text } from "@mantine/core";
+import { Group, LoadingOverlay, Pagination, Stack, Text } from "@mantine/core";
 import { FaCircle } from 'react-icons/fa';
 import { api } from '../../../api/api';
 import { useRefreshValue } from '../../../context/RefreshContext';
@@ -21,7 +21,7 @@ interface Props {
 }
 
 export const Table = ({ userId }: Props) => {
-  const { refresh } = useRefreshValue(); // estado para controle de re-renderização
+  const { refresh, setRefresh } = useRefreshValue(); // estado para controle de re-renderização
   // estados para controle de paginação:
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [firstIndex, setFirstIndex] = useState<number>(0);
@@ -62,6 +62,7 @@ export const Table = ({ userId }: Props) => {
   return (
     <>
       <Stack justify="flex-start" className={styles.table}>
+        {!refresh && transactions.length === 0 && <Text ta='center'>Não há transações cadastradas</Text>}
         {!refresh && transactions && transactions.slice(firstIndex, lastIndex).map((transaction: ITransaction) => (
           <Group key={transaction.id} position='center' className={styles.transaction}>
             <Text>
