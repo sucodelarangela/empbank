@@ -17,6 +17,9 @@ export const useFetch = (url: string) => {
     if (method === 'POST' || method === 'PATCH') {
       setConfig({
         method,
+        headers: {
+          "Content-type": "application/json"
+        },
         body: JSON.stringify(data)
       });
     } else if (method === 'DELETE') {

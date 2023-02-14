@@ -1,11 +1,12 @@
 import { useState, FormEvent, useEffect } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import { TextInput, PasswordInput, Button, Text, LoadingOverlay } from '@mantine/core';
+import { TextInput, PasswordInput, Button, Text, LoadingOverlay, Alert, Overlay } from '@mantine/core';
 import { useAuth } from '../../hooks/useAuth';
 import styles from './Login.module.sass';
 import logo from '../../assets/logo.png';
 
 export const Login = () => {
+  const [alert, setAlert] = useState<boolean>(false);
   const [error, setError] = useState<string>(''); // this is a front end error
   const [displayName, setDisplayName] = useState<string>(''); // this is a front end error
   const [email, setEmail] = useState<string>(''); // this is a front end error
@@ -30,8 +31,16 @@ export const Login = () => {
     setError('');
     const user = { displayName, email, password };
 
-    await createUser(user);
-    navigate('/login');
+    await createUser(user)
+      .then(() => {
+        if (!error) {
+          navigate('/login');
+          setAlert(true);
+          setTimeout(() => {
+            setAlert(false);
+          }, 4000);
+        };
+      });
   };
 
   // mostra erros de autenticação
@@ -42,6 +51,14 @@ export const Login = () => {
   return (
     <section className={styles.container}>
       {loading && <LoadingOverlay visible />}
+      {alert && (
+        <>
+          <Overlay opacity={0.6} color="#000" zIndex={5} />
+          <Alert /*icon={<IconAlertCircle size={16} />} */ title="Sucesso!" onClose={() => setAlert(false)} withCloseButton classNames={{ root: styles.toast }}>
+            Cadastro realizado. Faça seu login
+          </Alert>
+        </>
+      )}
       <div className={styles.banner}></div>
       <form className={styles.form} onSubmit={pathname === '/login' ? handleSubmit : handleRegister}>
         <img src={logo} alt="Bem vindo a Empbank" />
@@ -55,6 +72,7 @@ export const Login = () => {
             onChange={(e) => setDisplayName(e.target.value)}
             radius="md"
             size="lg"
+            required
           />
         )}
         <TextInput

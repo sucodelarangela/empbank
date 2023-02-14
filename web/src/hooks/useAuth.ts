@@ -50,6 +50,9 @@ export const useAuth = () => {
             },
             body: JSON.stringify({ email: user.email, name: user.displayName })
           });
+        })
+        .catch((error) => {
+          setError(error);
         });
 
       setLoading(false);
@@ -65,6 +68,8 @@ export const useAuth = () => {
         sysErrMsg = 'A senha precisa conter, pelo menos, 6 caracteres.';
       } else if (error.message.includes('email-already')) {
         sysErrMsg = 'E-mail já cadastrado. Faça seu login.';
+      } else if (error.message.includes('invalid-email')) {
+        sysErrMsg = 'E-mail inválido.';
       } else {
         sysErrMsg = 'Ocorreu um erro. Tente novamente mais tarde.';
       }
