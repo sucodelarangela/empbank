@@ -56,7 +56,7 @@ O projeto deste repositório é uma aplicação de controle financeiro onde o us
 
 ### Opcionais
 
-- [ ] Aplicação responsiva.
+- [x] Aplicação responsiva.
 
 ## ⚙️ Como usar
 
@@ -109,7 +109,7 @@ The project in this repository is an web app for financial control where the use
 
 ### Optionals
 
-- [ ] Responsive app.
+- [x] Responsive app.
 
 ## ⚙️ How to use it
 
