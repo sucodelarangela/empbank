@@ -1,5 +1,5 @@
 import { useState, FormEvent } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { TextInput, PasswordInput, Button } from '@mantine/core';
 import { useAuth } from '../../hooks/useAuth';
 import styles from './Login.module.sass';
@@ -7,10 +7,12 @@ import logo from '../../assets/logo.png';
 
 export const Login = () => {
   const [error, setError] = useState<string>(''); // this is a front end error
+  const [displayName, setDisplayName] = useState<string>(''); // this is a front end error
   const [email, setEmail] = useState<string>(''); // this is a front end error
   const [password, setPassword] = useState<string>(''); // this is a front end error
-  const { login } = useAuth();
+  const { login, createUser } = useAuth();
   let { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -23,17 +25,31 @@ export const Login = () => {
     return res;
   };
 
-  console.log(email, password);
+  const handleRegister = async (e: FormEvent) => {
+    e.preventDefault();
+    setError('');
+    const user = { displayName, email, password };
+
+    await createUser(user);
+    navigate('/login');
+  };
 
   return (
     <section className={styles.container}>
       <div className={styles.banner}></div>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={pathname === '/login' ? handleSubmit : handleRegister}>
         <img src={logo} alt="Bem vindo a Empbank" />
         <legend>Faça seu {pathname === '/login' ? 'login' : 'cadastro'}</legend>
         {error && <p>{error}</p>}
         {pathname === '/register' && (
-          <TextInput label='Nome completo' placeholder='Insira seu nome completo' radius="md" size="lg" />
+          <TextInput
+            label='Nome completo'
+            placeholder='Insira seu nome completo'
+            value={displayName}
+            onChange={(e) => setDisplayName(e.target.value)}
+            radius="md"
+            size="lg"
+          />
         )}
         <TextInput
           label='Email'

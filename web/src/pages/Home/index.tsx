@@ -24,8 +24,6 @@ export const Home = () => {
   const { logout } = useAuth();
   const [name, setName] = useState<string>('');
 
-  console.log(name);
-
   async function getUserData() {
     await fetch(`${api}/user/${user.uid}`)
       .then(res => res.json())

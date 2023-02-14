@@ -1,5 +1,6 @@
+import { api } from './../api/api';
 // eslint-disable-next-line no-unused-vars
-import { app } from '../firebase/config'; // instância do firebase em config
+import { app, secondaryApp } from '../firebase/config'; // instância do firebase em config
 // import { api } from '../api/api'; // url do backend
 import { useState, useEffect } from 'react';
 
@@ -33,15 +34,23 @@ export const useAuth = () => {
 
     try {
       const { user } = await createUserWithEmailAndPassword(
-        auth,
+        getAuth(secondaryApp),
         data.email,
         data.password
       );
 
       await updateProfile(user, {
         displayName: data.displayName,
-        photoURL: data.photoURL
-      });
+      })
+        .then(() => {
+          fetch(`${api}/user/${user.uid}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email: user.email, name: user.displayName })
+          });
+        });
 
       setLoading(false);
 

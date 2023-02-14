@@ -18,7 +18,6 @@ function App() {
   const { auth } = useAuth();
   const [user, setUser] = useState(undefined);
 
-
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUser(user);
@@ -30,7 +29,7 @@ function App() {
       <main className="App">
         <Router>
           <Routes>
-            <Route path="/" element={!user ? <Login /> : <RefreshProvider><Home /></RefreshProvider>} />
+            <Route path="/" element={user ? <RefreshProvider><Home /></RefreshProvider> : <Navigate to='/login' />} />
             <Route path="/login" element={!user ? <Login /> : <Navigate to='/' />} />
             <Route path="/register" element={!user ? <Login /> : <Navigate to='/' />} />
           </Routes>

@@ -53,6 +53,20 @@ app.post('/transactions', async (req: Request, res: Response) => {
   return res.status(201).json(transactions);
 });
 
+app.post('/user/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const body = req.body;
+  const newUser = await prisma.user.create({
+    data: {
+      id: id,
+      uuid: id,
+      email: body.email,
+      name: body.name
+    }
+  });
+  return res.status(201).json(newUser);
+});
+
 app.listen(port, () => {
   console.log('Database connected');
 });

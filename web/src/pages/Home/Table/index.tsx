@@ -29,8 +29,6 @@ export const Table = ({ userId }: Props) => {
   // estado para renderização da tabela
   const [transactions, setTransactions] = useState([]);
 
-  console.log(userId);
-
   // faz o GET do banco de dados e alimenta o estado acima
   async function fetchData() {
     await fetch(`${api}/transactions/${userId}`)
@@ -48,7 +46,7 @@ export const Table = ({ userId }: Props) => {
   // recarrega os dados quando houver atualização
   useEffect(() => {
     fetchData();
-  }, [refresh]);
+  }, [refresh, userId]);
 
   // lidando com índices para listagem de paginação
   useEffect(() => {
