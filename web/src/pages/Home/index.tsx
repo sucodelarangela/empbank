@@ -2,7 +2,6 @@ import styles from './Home.module.sass';
 import logo from '../../assets/logo.png';
 import { useEffect, useState } from 'react';
 import { Button, Loader, TextInput } from '@mantine/core';
-import { FiSearch } from 'react-icons/fi';
 import { Modal } from './Modal';
 import { Table } from './Table';
 import { useRefreshValue } from '../../context/RefreshContext';
@@ -23,6 +22,7 @@ export const Home = () => {
   const { user }: any = useAuthValue(); // dados do usuário logado no Firebase
   const { logout } = useAuth();
   const [name, setName] = useState<string>('');
+  const [query, setQuery] = useState<string>('');
 
   async function getUserData() {
     await fetch(`${api}/user/${user.uid}`)
@@ -38,7 +38,7 @@ export const Home = () => {
     <section className={styles.container}>
       <header>
         <img src={logo} alt='Sua carteira' />
-        <Button onClick={logout}>Bem vindo(a), {name}</Button>
+        <Button color='dark' onClick={logout} variant='subtle'>Bem vindo(a), {name}. Clique aqui para sair.</Button>
         <Modal userId={user.uid} />
       </header>
 
@@ -47,12 +47,20 @@ export const Home = () => {
 
       {/* BUSCA */}
       <form className={styles.search}>
-        <TextInput aria-label='Buscar transação' placeholder='Busque uma transação' radius='md' size='lg' />
-        <Button leftIcon={<FiSearch />} variant='outline' radius='md' size='lg'>Buscar</Button>
-      </form>
+        <TextInput
+          aria-label='Buscar transação'
+          placeholder='Busque uma transação'
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          radius='md'
+          size='lg'
+        />
+        {/* Botão removido por ser desnecessário na busca ao se usar o onChange */}
+        {/* <Button type='submit' leftIcon={<FiSearch />} variant='outline' radius='md' size='lg'>Buscar</Button> */}
+      </form>;
 
       {/* TABELA DE TRANSAÇÕES E PAGINAÇÃO */}
-      {refresh ? <Loader /> : <Table userId={user.uid} />}
+      {refresh ? <Loader /> : <Table userId={user.uid} query={query} />}
     </section >
   );
 };

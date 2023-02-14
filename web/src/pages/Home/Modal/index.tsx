@@ -154,7 +154,7 @@ export const Modal = ({ userId }: Props) => {
       </Dialog>
 
       <Group position='center'>
-        <Button radius='md' size='lg' onClick={handleClick}>Nova transação</Button>
+        <Button radius='md' size='lg' onClick={handleClick} className={styles.open_btn}>Nova transação</Button>
       </Group>
     </>
   );
