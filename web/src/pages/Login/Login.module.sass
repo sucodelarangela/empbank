@@ -8,11 +8,15 @@
   gap: 1.5rem
   grid-template-columns: 1fr 390px
   padding: 1.5rem
+  @include mixins.tablet
+    grid-template-columns: 1fr
 
 .banner
   background: url('../../assets/cover.png') no-repeat left
   background-size: cover
   border-radius: 1.375rem
+  @include mixins.tablet
+    display: none
 
 .form
   font-family: variables.$open-sans
@@ -22,6 +26,8 @@
   & img
     display: block
     margin: auto
+    @include mixins.mobile
+      width: 80%
   & legend
     font-weight: 700
     font-size: 2rem

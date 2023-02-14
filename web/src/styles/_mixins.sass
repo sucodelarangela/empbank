@@ -1,12 +1,9 @@
 @use './variables'
 
-@mixin button ($bgcolor, $fontsize, $textcase, $padding, $rad)
-  background-color: $bgcolor
-  font-size: $fontsize
-  text-transform: $textcase
-  padding: $padding
-  border-radius: $rad
-  color: variables.$gray-6
-  width: 100%
-  border: none
-  cursor: pointer
+@mixin tablet
+  @media screen and (max-width: 1080px)
+    @content
+
+@mixin mobile
+  @media screen and (max-width: 500px)
+    @content
