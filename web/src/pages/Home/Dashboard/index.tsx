@@ -58,7 +58,13 @@ export const Dashboard = ({ userId }: Props) => {
   }, [refresh]);
 
   return (
-    <SimpleGrid cols={3} spacing='xl' className={styles.dashboard}>
+    <SimpleGrid
+      cols={3}
+      spacing='xl'
+      className={styles.dashboard}
+      breakpoints={[
+        { maxWidth: 600, cols: 1, verticalSpacing: 'xs' }
+      ]}>
       <Paper withBorder p='md' radius='md'>
         <Group position='apart'>
           <Text>Entradas</Text>

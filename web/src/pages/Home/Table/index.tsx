@@ -74,17 +74,17 @@ export const Table = ({ userId, query }: Props) => {
         {!refresh && transactions.length === 0 && <Text ta='center'>Não há transações cadastradas</Text>}
         {!refresh && filteredTransactions && filteredTransactions.slice(firstIndex, lastIndex).map((transaction: ITransaction) => (
           <Group key={transaction.id} position='center' className={styles.transaction}>
-            <Text>
+            <Text className={styles.title}>
               <FaCircle size={18} color={transaction.type === 'income' ? '#00B37E' : '#F75A68'} />
               {transaction.title}
             </Text>
-            <Text color={transaction.type === 'income' ? '#00B37E' : '#F75A68'}>
+            <Text color={transaction.type === 'income' ? '#00B37E' : '#F75A68'} className={styles.title}>
               {transaction.type === 'income' ? `R$ ${transaction.value}` : `- R$ ${transaction.value}`}
             </Text>
-            <Text>
+            <Text className={styles.title}>
               {transaction.category}
             </Text>
-            <Text>
+            <Text className={styles.title}>
               {new Date(transaction.createdAt).toLocaleString().split(' ')[0]}
             </Text>
           </Group>

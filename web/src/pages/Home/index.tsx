@@ -57,7 +57,7 @@ export const Home = () => {
         />
         {/* Botão removido por ser desnecessário na busca ao se usar o onChange */}
         {/* <Button type='submit' leftIcon={<FiSearch />} variant='outline' radius='md' size='lg'>Buscar</Button> */}
-      </form>;
+      </form>
 
       {/* TABELA DE TRANSAÇÕES E PAGINAÇÃO */}
       {refresh ? <Loader /> : <Table userId={user.uid} query={query} />}

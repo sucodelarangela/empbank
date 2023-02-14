@@ -1,4 +1,5 @@
 @use '../../../styles/variables'
+@use '../../../styles/mixins'
 
 .table
   gap: .5rem
@@ -6,8 +7,23 @@
   .transaction
     border: 1px solid variables.$gray-4
     border-radius: 8px
-    display: flex
-    justify-content: space-between
+    display: grid
+    grid-template-areas: 'title value category type'
+    grid-template-columns: 1fr 1fr 1fr 1fr
     padding: 1.25rem
     & svg
       margin-right: 1rem
+    & .title
+      grid-area: title
+      &:nth-of-type(2)
+        grid-area: value
+        text-align: center
+      &:nth-of-type(3)
+        grid-area: category
+        text-align: center
+      &:last-of-type
+        grid-area: type
+        text-align: end
+    @include mixins.mobile
+      grid-template-areas: 'title title title' 'value category type'
+      grid-template-columns: 1fr 1fr 1fr
