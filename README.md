@@ -8,12 +8,16 @@ _[Read it in English](#English)_
 
 O projeto deste repositório é uma aplicação de controle financeiro onde o usuário pode cadastrar suas entradas e saídas financeiras mensais. Este projeto foi desenvolvido como desafio técnico para o processo seletivo da [**Empbank**](https://empbank.com.br/) para o cargo de **Desenvolvedor Fullstack Júnior**.
 
+> Nota: O banco de dados PostgreSQL e a hospedagem da API foi feita via Railway, que possui limitação de horas mensais para funcionamento, colocando a aplicação em hibernação ao fim deste limite (o limite é renovado no mês seguinte).
+>
+> Na data de 15/02, o limite de tempo estava pouco acima de 300h, o que deve durar tempo suficiente para que a análise da Empbank seja concluída nos próximos dias.
+
 <!-- prettier-ignore -->
 | 🪧 Vitrine. Dev |     |
 | -------------- | --- |
 | ✨ Nome        | **Empbank: controle financeiro** |
-| 🏷️ Tecnologias | React, TypeScript, [Mantine](https://mantine.dev/), Sass, PostgreSQL, Prisma, Firebase, Node, Express |
-| 🚀 URL         | Em breve |
+| 🏷️ Tecnologias | React, TypeScript, [Mantine](https://mantine.dev/), Sass, PostgreSQL, Prisma, Firebase, Node, Express, Railway |
+| 🚀 URL         | **https://empbank-angela.vercel.app/** |
 | 🎨 Design      | [Figma](https://www.figma.com/file/I5ctuYJN7TMTEQx5oL1wt3/Prova-Empbank) |
 
 ![](https://raw.githubusercontent.com/sucodelarangela/empbank/main/web/public/og-image.jpg#vitrinedev)
@@ -28,6 +32,7 @@ O projeto deste repositório é uma aplicação de controle financeiro onde o us
   <img src="https://img.shields.io/badge/prisma-f7fafc?style=for-the-badge&logo=prisma&logoColor=2D3748">
   <img src="https://img.shields.io/badge/node-233056?style=for-the-badge&logo=node.js&logoColor=339933">
   <img src="https://img.shields.io/badge/express-eeeeee?style=for-the-badge&logo=express&logoColor=000000">
+  <img src="https://img.shields.io/badge/railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=fff">
 </div>
 
 ## ✅ Requisitos técnicos
@@ -82,6 +87,10 @@ _English version_
 ## 🔎 Overview
 
 The project in this repository is an web app for financial control where the user may register her/his monthly cash inflow and outflows. This project was developed as a technical test for [**Empbank**](https://empbank.com.br/)'s **Junior Fullstack Developer** opening.
+
+> Note: The database and the API url are hosted via Railway, which has a monthly working-time limit and which puts the app under hybernation after this limit is reached (it renews the next month).
+>
+> In Feb/12, the time limit was a little bit higher than 300h, which may be enough time for the analysis of Empbank to occur in the next few days.
 
 ## ✅ Technical requirements
 
