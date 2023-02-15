@@ -10,14 +10,17 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
   signOut,
-  reauthenticateWithCredential,
-  EmailAuthProvider,
-  deleteUser
 } from 'firebase/auth';
 
+interface IData {
+  displayName?: string;
+  email: string;
+  password: string;
+}
+
 export const useAuth = () => {
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean | null>(null);
   const [cancelled, setCancelled] = useState(false); // CLEANUP
 
   const auth = getAuth(app);
@@ -27,7 +30,7 @@ export const useAuth = () => {
   }
 
   // CADASTRANDO NOVO USUÁRIO
-  const createUser = async (data) => {
+  const createUser = async (data: IData) => {
     checkIfIsCancelled();
     setLoading(true);
     setError(null);
@@ -58,7 +61,7 @@ export const useAuth = () => {
       setLoading(false);
 
       return user;
-    } catch (error) {
+    } catch (error: any) {
       console.error(error.message);
       console.error(typeof error.message);
 
@@ -86,14 +89,14 @@ export const useAuth = () => {
   };
 
   // LOG IN
-  const login = async (data) => {
+  const login = async (data: IData) => {
     checkIfIsCancelled();
     setLoading(true);
-    setError(false);
+    setError(null);
 
     try {
       await signInWithEmailAndPassword(auth, data.email, data.password);
-    } catch (error) {
+    } catch (error: any) {
       let sysErrMsg;
 
       if (error.message.includes('user-not-found')) {
@@ -108,39 +111,6 @@ export const useAuth = () => {
       setLoading(false);
     }
   };
-
-  // DELETE USER = requer reautenticação
-  // const deleteAccount = async () => {
-  //   checkIfIsCancelled();
-  //   setLoading(true);
-
-  //   try {
-  //     const user = auth.currentUser;
-  //     const userProvidedPassword = prompt('Insira sua senha para deletar sua conta');
-  //     const credential = EmailAuthProvider.credential(
-  //       auth.currentUser.email,
-  //       userProvidedPassword
-  //     );
-  //     await reauthenticateWithCredential(user, credential);
-  //     await deleteUser(user)
-  //       .then(async () => {
-  //         let id;
-  //         await api.get('/authors')
-  //           .then(res => {
-  //             res.data.forEach(author => {
-  //               if (author.name === user.displayName) {
-  //                 id = author._id;
-  //               }
-  //             });
-  //           });
-  //         await api.delete(`/authors/${id}`);
-  //         await api.delete(`/codes/byauthor/${id}`);
-  //       });
-  //   } catch (error) {
-  //     console.error(error.message);
-  //   }
-  //   setLoading(false);
-  // };
 
   // CLEANUP
   useEffect(() => {

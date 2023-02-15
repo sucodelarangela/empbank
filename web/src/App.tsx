@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from './hooks/useAuth';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, User } from 'firebase/auth';
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { AuthProvider } from "./context/AuthContext";
@@ -16,7 +16,7 @@ interface IUser {
 
 function App() {
   const { auth } = useAuth();
-  const [user, setUser] = useState(undefined);
+  const [user, setUser] = useState<User | null | undefined>(undefined);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -25,6 +25,7 @@ function App() {
   }, [auth]);
 
   return (
+    // @ts-ignore
     <AuthProvider value={{ user }}>
       <main className="App">
         <Router>
