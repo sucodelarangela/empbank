@@ -6,12 +6,12 @@ import styles from './Login.module.sass';
 import logo from '../../assets/logo.png';
 
 export const Login = () => {
-  const [alert, setAlert] = useState<boolean>(false);
+  // const [alert, setAlert] = useState<boolean>(false);
   const [error, setError] = useState<string>(''); // this is a front end error
   const [displayName, setDisplayName] = useState<string>(''); // this is a front end error
   const [email, setEmail] = useState<string>(''); // this is a front end error
   const [password, setPassword] = useState<string>(''); // this is a front end error
-  const { login, createUser, error: authError, loading } = useAuth();
+  const { login, createUser, error: authError, loading, alert, setAlert } = useAuth();
   let { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -31,22 +31,14 @@ export const Login = () => {
     setError('');
     const user = { displayName, email, password };
 
-    await createUser(user)
-      .then(() => {
-        if (!error) {
-          navigate('/login');
-          setAlert(true);
-          setTimeout(() => {
-            setAlert(false);
-          }, 4000);
-        };
-      });
+    await createUser(user);
   };
 
   // mostra erros de autenticação
   useEffect(() => {
     if (authError) setError(authError);
-  }, [authError]);
+    if (alert) navigate('/login');
+  }, [authError, alert]);
 
   return (
     <section className={styles.container}>
@@ -55,7 +47,7 @@ export const Login = () => {
         <>
           <Overlay opacity={0.6} color="#000" zIndex={5} />
           <Alert /*icon={<IconAlertCircle size={16} />} */ title="Sucesso!" onClose={() => setAlert(false)} withCloseButton classNames={{ root: styles.toast }}>
-            Cadastro realizado. Faça seu login
+            Cadastro realizado. Faça seu login.
           </Alert>
         </>
       )}

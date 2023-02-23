@@ -19,6 +19,7 @@ interface IData {
 }
 
 export const useAuth = () => {
+  const [alert, setAlert] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean | null>(null);
   const [cancelled, setCancelled] = useState(false); // CLEANUP
@@ -53,12 +54,16 @@ export const useAuth = () => {
             },
             body: JSON.stringify({ email: user.email, name: user.displayName })
           });
+          setAlert(true);
         })
         .catch((error) => {
           setError(error);
         });
 
       setLoading(false);
+      setTimeout(() => {
+        setAlert(false);
+      }, 4000);
 
       return user;
     } catch (error: any) {
@@ -119,6 +124,8 @@ export const useAuth = () => {
 
   return {
     auth,
+    alert,
+    setAlert,
     createUser,
     error,
     loading,

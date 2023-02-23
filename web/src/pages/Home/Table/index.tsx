@@ -85,7 +85,7 @@ export const Table = ({ userId, query }: Props) => {
               {transaction.category}
             </Text>
             <Text className={styles.title}>
-              {new Date(transaction.createdAt).toLocaleString().split(' ')[0]}
+              {new Date(transaction.createdAt).toLocaleDateString()}
             </Text>
           </Group>
         ))}
