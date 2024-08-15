@@ -8,17 +8,15 @@ _[Read it in English](#English)_
 
 O projeto deste repositório é uma aplicação de controle financeiro onde o usuário pode cadastrar suas entradas e saídas financeiras mensais. Este projeto foi desenvolvido como desafio técnico para o processo seletivo da [**Empbank**](https://empbank.com.br/) para o cargo de **Desenvolvedor Fullstack Júnior**.
 
-> Nota: O banco de dados PostgreSQL e a hospedagem da API foi feita via Railway, que possui limitação de horas mensais para funcionamento, colocando a aplicação em hibernação ao fim deste limite (o limite é renovado no mês seguinte).
->
-> Na data de 15/02, o limite de tempo estava pouco acima de 300h, o que deve durar tempo suficiente para que a análise da Empbank seja concluída nos próximos dias.
+> Nota: O banco de dados PostgreSQL e a hospedagem da API foi feita via Railway, que possui limitação de horas mensais para funcionamento. O limite de tempo permitiu tempo suficiente para que a avaliação técnica do projeto pudesse ser feita. Após o término do limite, o banco de dados foi excluído e, consequentemente, o deploy da aplicação. Fique à vontade para estudar o código.
 
 <!-- prettier-ignore -->
 | 🪧 Vitrine. Dev |     |
 | -------------- | --- |
 | ✨ Nome        | **Empbank: controle financeiro** |
 | 🏷️ Tecnologias | React, TypeScript, [Mantine](https://mantine.dev/), Sass, PostgreSQL, Prisma, Firebase, Node, Express, Railway |
-| 🚀 URL         | **https://empbank.vercel.app** |
 | 🎨 Design      | [Figma](https://www.figma.com/file/I5ctuYJN7TMTEQx5oL1wt3/Prova-Empbank) |
+<!--| 🚀 URL         | **https://empbank.vercel.app** |-->
 
 ![](https://raw.githubusercontent.com/sucodelarangela/empbank/main/web/public/og-image.jpg#vitrinedev)
 
@@ -64,12 +62,12 @@ O projeto deste repositório é uma aplicação de controle financeiro onde o us
 
 - [x] Aplicação responsiva.
 
-## ⚙️ Como usar
+## ⚙️ Como funciona
 
-- Cadastre-se na aplicação na tela de Cadastro (você pode usar um e-mail fictício);
-- Se o cadastro der certo, você será redirecionado para a tela de Login para acesso;
-- Caso não queira efetuar cadastro, basta acessar a aplicação com o email `teste@teste.com` e senha `123456`;
-- Na tela Wallet, você pode cadastrar uma Nova Transação no botão do canto superior direito;
+- O usuário faz seu cadastro na aplicação na tela de Cadastro (podendo usar um e-mail fictício);
+- Se o cadastro der certo, o usuário é redirecionado para a tela de Login para acesso;
+- Caso não queira efetuar cadastro, é possível acessar a aplicação com o email `teste@teste.com` e senha `123456`;
+- Na tela Wallet, o usuário pode cadastrar uma Nova Transação no botão do canto superior direito;
 - As transações cadastradas são mostradas na mesma tela em forma de tabela;
 - Para pesquisar transações, basta digitar na barra de busca;
 - Para sair da aplicação, clique na mensagem de boas vindas na parte superior da tela.
@@ -88,9 +86,7 @@ _English version_
 
 The project in this repository is an web app for financial control where the user may register her/his monthly cash inflow and outflows. This project was developed as a technical test for [**Empbank**](https://empbank.com.br/)'s **Junior Fullstack Developer** opening.
 
-> Note: The database and the API url are hosted via Railway, which has a monthly working-time limit and which puts the app under hybernation after this limit is reached (it renews the next month).
->
-> In Feb/12, the time limit was a little bit higher than 300h, which may be enough time for the analysis of Empbank to occur in the next few days.
+> Note: The database and the API url are hosted via Railway, which has a monthly working-time limit. This time limit was just enough so that my code and running application could be analysed by the technical reviewers. When the time limit has finished, the database and the application deploy were deleted. Feel free to browse my code.
 
 ## ✅ Technical requirements
 
@@ -123,12 +119,12 @@ The project in this repository is an web app for financial control where the use
 
 ## ⚙️ How to use it
 
-- Register to the app in the Register page (you can use a fake email);
-- If the registration is successful, you will be redirected to Login screen for access;
-- In case you do not wish to register, you can enter the application with the emmail `teste@teste.com` and password `123456`;
-- On Wallet screen, you can add a new transaction by clicking the button on the top right corner;
+- The user registers to the app in the Register page (it is possible to use a fake email);
+- If the registration is successful, the user will be redirected to Login screen for access;
+- In case the user does not wish to register, they can enter the application with the e-mail `teste@teste.com` and password `123456`;
+- On Wallet screen, the user can add a new transaction by clicking the button on the top right corner;
 - The new transactions will be shown on this same screen in the form of a table;
-- To search transactions, you can type directly on the search bar;
+- To search transactions, the user can type directly on the search bar;
 - To log out of the application, click on the welcome message on the top center of the screen.
 
 <a href='#top'>🔼 Back to top</a>
