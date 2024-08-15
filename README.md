@@ -17,7 +17,7 @@ O projeto deste repositório é uma aplicação de controle financeiro onde o us
 | -------------- | --- |
 | ✨ Nome        | **Empbank: controle financeiro** |
 | 🏷️ Tecnologias | React, TypeScript, [Mantine](https://mantine.dev/), Sass, PostgreSQL, Prisma, Firebase, Node, Express, Railway |
-| 🚀 URL         | **https://empbank-angela.vercel.app/** |
+| 🚀 URL         | **https://empbank.vercel.app** |
 | 🎨 Design      | [Figma](https://www.figma.com/file/I5ctuYJN7TMTEQx5oL1wt3/Prova-Empbank) |
 
 ![](https://raw.githubusercontent.com/sucodelarangela/empbank/main/web/public/og-image.jpg#vitrinedev)
